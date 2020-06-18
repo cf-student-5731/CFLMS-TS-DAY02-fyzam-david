@@ -1,30 +1,74 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 $(document).ready(function () {
-    var Vehicles = /** @class */ (function () {
-        function Vehicles(brand, model, price, horsepower) {
-            this.brand = '';
-            this.model = '';
-            this.price = 0;
-            this.horsepower = 0;
-            this.engine = '';
-            this.brand = brand;
-            this.model = model;
-            this.price = price;
-            this.horsepower = horsepower;
+    var Person = /** @class */ (function () {
+        function Person(firstName, lastName, jobTitle, age) {
+            this.firstName = '';
+            this.lastName = '';
+            this.jobTitle = '';
+            this.age = 0;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.jobTitle = jobTitle;
+            this.age = age;
         }
-        Vehicles.prototype.printBrand = function () {
-            return "This model is named " + this.brand;
+        Person.prototype.whoAmI = function () {
+            return "Hello there, My name is " + this.firstName + " " + this.lastName + " and I am " + this.age + " years old and I am " + this.jobTitle;
         };
         ;
-        Vehicles.prototype.printSpecs = function () {
-            return "<ul>\n\t\t\t\t\t\t<li>Model: " + this.model + "</li>\n\t\t\t\t\t\t<li>Price: " + this.price + " Dollars</li>\n\t\t\t\t\t\t<li>Horsepower: " + this.horsepower + " PS</li>\n\t\t\t\t\t</ul>";
-        };
-        ;
-        return Vehicles;
+        return Person;
     }());
     ;
-    var car = new Vehicles('Tesla', '3', 89000, 240);
-    $('body').append("<div class=\"brand\"><h1>" + car.brand + "</h1></div>");
-    $('.brand').on('click', function () {
-        $('.brand').append("" + car.printSpecs());
-    });
+    var human = new Person('Tronald', 'Dump', 'an Idiot', 125);
+    $('body').append("<div>" + human.whoAmI() + "<hr>" + human.firstName + "</div>");
+    var employee = /** @class */ (function (_super) {
+        __extends(employee, _super);
+        function employee(firstName, lastName, jobTitle, age, salary, jobLocation) {
+            var _this = _super.call(this, firstName, lastName, jobTitle, age) || this;
+            _this.salary = 0;
+            _this.jobLocation = '';
+            _this.salary = salary;
+            _this.jobLocation = jobLocation;
+            return _this;
+        }
+        ;
+        employee.prototype.myWork = function () {
+            return "I work in " + this.jobLocation + " and I earn " + this.salary + " Dollars";
+        };
+        return employee;
+    }(Person));
+    ;
+    var slave = new employee('Barack', 'Obama', 'a President', 99, 1000000, 'USA');
+    $('body').append("<hr><p>" + slave.whoAmI() + "</p><p>" + slave.myWork() + "</p>");
+    // ---------------------------
+    var boss = /** @class */ (function (_super) {
+        __extends(boss, _super);
+        function boss(firstName, lastName, jobTitle, age, salary, jobLocation, leads) {
+            var _this = _super.call(this, firstName, lastName, jobTitle, age, salary, jobLocation) || this;
+            _this.leads = 0;
+            _this.leads = leads;
+            return _this;
+        }
+        ;
+        boss.prototype.leading = function () {
+            return "I lead " + this.leads + " People";
+        };
+        return boss;
+    }(employee));
+    ;
+    var homer = new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
+    $('body').append("<hr><p>" + homer.whoAmI() + "</p><p>" + homer.myWork() + "</p><p>" + homer.leading());
+    var simpsons = [boss];
+    simpsons[0] = new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
 });

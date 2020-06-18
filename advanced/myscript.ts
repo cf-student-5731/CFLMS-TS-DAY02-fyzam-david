@@ -1,38 +1,69 @@
-$(document).ready(function () {
+$(document).ready(function(){
 
-	class Vehicles {
-		public brand: string = '';
-		public model: string = '';
-		public price: number = 0;
-		public horsepower: number = 0;
-		public engine: string = '';
+	class Person{
+		public firstName: string = '';
+		public lastName: string = '';
+		public jobTitle: string = '';
+		public age: number = 0;
 
-		constructor(brand: string, model: string, price: number, horsepower: number) {
-			this.brand = brand;
-			this.model = model;
-			this.price = price;
-			this.horsepower = horsepower;
+		constructor(firstName: string, lastName: string, jobTitle: string, age: number) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.jobTitle = jobTitle
+			this.age = age;
 		}
-		printBrand() {
-			return `This model is named ${this.brand}`;
-		};
-			
-		printSpecs() {
-			return `<ul>
-						<li>Model: ${this.model}</li>
-						<li>Price: ${this.price} Dollars</li>
-						<li>Horsepower: ${this.horsepower} PS</li>
-					</ul>`;
+
+		whoAmI() {
+			return `Hello there, My name is ${this.firstName} ${this.lastName} and I am ${this.age} years old and I am ${this.jobTitle}`;
 		};
 	};
-	let car = new Vehicles('Tesla', '3', 89000, 240,);
 
-	$('body').append(`<div class="brand"><h1>${car.brand}</h1></div>`);
+	let human = new Person('Tronald', 'Dump', 'an Idiot', 125);
+	
+	$('body').append(`<div>${human.whoAmI()}<hr>${human.firstName}</div>`);
 
-	$('.brand').on('click', function () {
-		$('.brand').append(`${car.printSpecs()}`);
+	class employee extends Person {
+		public salary: number = 0;
+		public jobLocation: string = '';
 
-	});
+		constructor(firstName: string, lastName: string, jobTitle: string, age: number, salary: number, jobLocation: string) {
+			super(firstName, lastName, jobTitle, age);
+			this.salary = salary;
+			this.jobLocation = jobLocation;
+		};
+
+		myWork() {
+			return `I work in ${this.jobLocation} and I earn ${this.salary} Dollars`;
+		}
+	};
+
+	let slave = new employee('Barack', 'Obama', 'a President', 99, 1000000, 'USA');
+
+	$('body').append(`<hr><p>${slave.whoAmI()}</p><p>${slave.myWork()}</p>`);
+
+
+
+	// ---------------------------
+
+	class boss extends employee {
+		public leads: number = 0;
+
+		constructor(firstName: string, lastName: string, jobTitle: string, age: number, salary: number, jobLocation: string, leads: number) {
+			super(firstName, lastName, jobTitle, age, salary, jobLocation);
+			this.leads = leads;
+		};
+		leading() {
+			return `I lead ${this.leads} People`;
+		}
+	};
+
+	let homer = new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
+
+	$('body').append(`<hr><p>${homer.whoAmI()}</p><p>${homer.myWork()}</p><p>${homer.leading()}`);
+
+	let simpsons = [boss];
+
+	simpsons[0]=new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
 
 
 
