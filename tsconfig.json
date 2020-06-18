@@ -1,0 +1,14 @@
+
+{
+    "compilerOptions": {
+        "target": "ES6" ,
+        
+        "experimentalDecorators": true, // in order to remove this error that yes i am aware that the decorator is a feature which might change in the future don't worn me .
+    }
+    "lib":
+    ["dom",
+        "ES5",
+        "ES6",
+        "ES2015"
+    ]
+ }
