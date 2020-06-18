@@ -76,9 +76,11 @@ $(document).ready(function () {
     var car = new Array();
     car[0] = new Truck('Tesla', '3', 89000, 240, 'Electro', false);
     car[1] = new Truck('Honda', 'Civic', 15000, 70, 'Fuel', false);
+    car[2] = new Truck('Lada', 'Samara', 2000, 40, 'Solar', false);
     var truck = new Array();
     truck[0] = new Truck('Cyber', 'large', 19000, 140, 'Spiritus', true);
     truck[1] = new Truck('Renault', 'micro', 9000, 90, 'Fuel', true);
+    truck[2] = new Truck('Monster', 'mega', 90000, 810, 'Love', true);
     $('body').append("<div class=\"Truck\"><h1>TRUCKS</h1></div><div class=\"Car\"><h1>CARS</h1></div>");
     var _loop_1 = function (i) {
         $('.Car').append("<div class = \"carBrand_" + i + "\"></div>");
