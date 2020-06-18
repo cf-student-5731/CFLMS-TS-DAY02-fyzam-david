@@ -92,7 +92,7 @@ $(document).ready(function () {
 	};
 	
 
-	for (let i = 0; i < car.length; i++){
+	for (let i = 0; i < truck.length; i++){
 		$('.Truck').append(`<div class = "truckBrand_${i}"></div>`);
 		$('.Truck').append(`<div class = "truckSpecs_${i}"></div>`);
 		$('.Truck').append(`<div class = "truckType_${i}"></div>`);
@@ -114,10 +114,5 @@ $(document).ready(function () {
 		});
 
 	};
-
-
-
-
-
 	
 });
