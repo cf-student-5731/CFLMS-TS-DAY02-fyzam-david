@@ -12,63 +12,109 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 $(document).ready(function () {
-    var Person = /** @class */ (function () {
-        function Person(firstName, lastName, jobTitle, age) {
-            this.firstName = '';
-            this.lastName = '';
-            this.jobTitle = '';
-            this.age = 0;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.jobTitle = jobTitle;
-            this.age = age;
+    var Vehicles = /** @class */ (function () {
+        function Vehicles(brand, model, price, horsepower) {
+            this.brand = '';
+            this.model = '';
+            this.price = 0;
+            this.horsepower = 0;
+            this.brand = brand;
+            this.model = model;
+            this.price = price;
+            this.horsepower = horsepower;
         }
-        Person.prototype.whoAmI = function () {
-            return "Hello there, My name is " + this.firstName + " " + this.lastName + " and I am " + this.age + " years old and I am " + this.jobTitle;
+        Vehicles.prototype.printBrand = function () {
+            return "This model is named " + this.brand;
         };
         ;
-        return Person;
+        Vehicles.prototype.printSpecs = function () {
+            return "<ul>\n\t\t\t\t\t\t<li>Model: " + this.model + "</li>\n\t\t\t\t\t\t<li>Price: " + this.price + " Dollars</li>\n\t\t\t\t\t\t<li>Horsepower: " + this.horsepower + " PS</li>\n\t\t\t\t\t</ul>";
+        };
+        ;
+        return Vehicles;
     }());
     ;
-    var human = new Person('Tronald', 'Dump', 'an Idiot', 125);
-    $('body').append("<div>" + human.whoAmI() + "<hr>" + human.firstName + "</div>");
-    var employee = /** @class */ (function (_super) {
-        __extends(employee, _super);
-        function employee(firstName, lastName, jobTitle, age, salary, jobLocation) {
-            var _this = _super.call(this, firstName, lastName, jobTitle, age) || this;
-            _this.salary = 0;
-            _this.jobLocation = '';
-            _this.salary = salary;
-            _this.jobLocation = jobLocation;
+    var Motor = /** @class */ (function (_super) {
+        __extends(Motor, _super);
+        function Motor(brand, model, price, horsepower, engine) {
+            var _this = _super.call(this, brand, model, price, horsepower) || this;
+            _this.engine = '';
+            _this.engine = engine;
             return _this;
         }
         ;
-        employee.prototype.myWork = function () {
-            return "I work in " + this.jobLocation + " and I earn " + this.salary + " Dollars";
+        Motor.prototype.printEngine = function () {
+            return "I am " + this.engine + " powered.";
         };
-        return employee;
-    }(Person));
+        ;
+        return Motor;
+    }(Vehicles));
     ;
-    var slave = new employee('Barack', 'Obama', 'a President', 99, 1000000, 'USA');
-    $('body').append("<hr><p>" + slave.whoAmI() + "</p><p>" + slave.myWork() + "</p>");
-    // ---------------------------
-    var boss = /** @class */ (function (_super) {
-        __extends(boss, _super);
-        function boss(firstName, lastName, jobTitle, age, salary, jobLocation, leads) {
-            var _this = _super.call(this, firstName, lastName, jobTitle, age, salary, jobLocation) || this;
-            _this.leads = 0;
-            _this.leads = leads;
+    var Truck = /** @class */ (function (_super) {
+        __extends(Truck, _super);
+        function Truck(brand, model, price, horsepower, engine, truck) {
+            var _this = _super.call(this, brand, model, price, horsepower, engine) || this;
+            _this.truck = false;
+            _this.truck = truck;
             return _this;
         }
         ;
-        boss.prototype.leading = function () {
-            return "I lead " + this.leads + " People";
+        Truck.prototype.printTruck = function () {
+            var type = '';
+            if (this.truck) {
+                type = 'Truck';
+            }
+            else {
+                type = 'Car';
+            }
+            return "I am a " + type + ".";
         };
-        return boss;
-    }(employee));
+        ;
+        return Truck;
+    }(Motor));
     ;
-    var homer = new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
-    $('body').append("<hr><p>" + homer.whoAmI() + "</p><p>" + homer.myWork() + "</p><p>" + homer.leading());
-    var simpsons = [boss];
-    simpsons[0] = new boss('Homer', 'Simpson', 'a Father', 54, 29, 'Springfield', 5);
+    var car = new Array();
+    car[0] = new Truck('Tesla', '3', 89000, 240, 'Electro', false);
+    car[1] = new Truck('Honda', 'Civic', 15000, 70, 'Fuel', false);
+    var truck = new Truck('Cyber', 'large', 19000, 140, 'Spiritus', true);
+    $('body').append("<div class=\"Truck\"><h1>TRUCKS</h1></div><div class=\"Car\"><h1>CARS</h1></div>");
+    var _loop_1 = function (i) {
+        $('.Car').append("<div class = \"carBrand_" + i + "\"></div>");
+        $('.Car').append("<div class = \"carSpecs_" + i + "\"></div>");
+        $('.Car').append("<div class = \"carType_" + i + "\"></div>");
+        $('.Car').append("<div class = \"carEngine_" + i + "\"></div>");
+        $('.Car').append("<div class = \"carEngineType_" + i + "\"></div>");
+        $('.Car').on('click', function () {
+            $(".carBrand_" + i).html("<div><h2>" + car[i].brand + "</h2></div>");
+        });
+        $(".carBrand_" + i).on('click', function () {
+            $(".carSpecs_" + i).html("" + car[i].printSpecs());
+            $(".carType_" + i).html("" + car[i].printTruck());
+            $(".carEngine_" + i).html("<div><h3>Engine:</h3></div>");
+        });
+        $(".carEngine_" + i).on('click', function () {
+            $(".carEngineType_" + i).html("" + car[i].printEngine());
+        });
+    };
+    for (var i = 0; i < car.length; i++) {
+        _loop_1(i);
+    }
+    ;
+    $('.Truck').append("<div class = \"truckBrand\"></div>");
+    $('.Truck').append("<div class = \"truckSpecs\"></div>");
+    $('.Truck').append("<div class = \"truckType\"></div>");
+    $('.Truck').append("<div class = \"truckEngine\"></div>");
+    $('.Truck').append("<div class = \"truckEngineType\"></div>");
+    // --------------------------------
+    $('.Truck').on('click', function () {
+        $('.truckBrand').html("<div><h2>" + truck.brand + "</h2></div>");
+    });
+    $('.truckBrand').on('click', function () {
+        $('.truckSpecs').html("" + truck.printSpecs());
+        $('.truckType').html("" + truck.printTruck());
+        $('.truckEngine').html("<div><h3>Engine:</h3></div>");
+    });
+    $('.truckEngine').on('click', function () {
+        $('.truckEngineType').html("" + truck.printEngine());
+    });
 });
