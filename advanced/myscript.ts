@@ -59,8 +59,9 @@ $(document).ready(function () {
 	car[0] = new Truck('Tesla', '3', 89000, 240, 'Electro', false);
 	car[1] = new Truck('Honda', 'Civic', 15000, 70, 'Fuel', false);
 
-
-	let truck = new Truck('Cyber', 'large', 19000, 140, 'Spiritus', true);
+	let truck: any = new Array(); 
+	truck[0] = new Truck('Cyber', 'large', 19000, 140, 'Spiritus', true);
+	truck[1] = new Truck('Renault', 'micro', 9000, 90, 'Fuel', true);
 
 	$('body').append(`<div class="Truck"><h1>TRUCKS</h1></div><div class="Car"><h1>CARS</h1></div>`);
 
@@ -89,30 +90,31 @@ $(document).ready(function () {
 	};
 	
 
-		$('.Truck').append(`<div class = "truckBrand"></div>`);
-		$('.Truck').append(`<div class = "truckSpecs"></div>`);
-		$('.Truck').append(`<div class = "truckType"></div>`);
-		$('.Truck').append(`<div class = "truckEngine"></div>`);
-		$('.Truck').append(`<div class = "truckEngineType"></div>`);
+	for (let i = 0; i < car.length; i++){
+		$('.Truck').append(`<div class = "truckBrand_${i}"></div>`);
+		$('.Truck').append(`<div class = "truckSpecs_${i}"></div>`);
+		$('.Truck').append(`<div class = "truckType_${i}"></div>`);
+		$('.Truck').append(`<div class = "truckEngine_${i}"></div>`);
+		$('.Truck').append(`<div class = "truckEngineType_${i}"></div>`);
+
+		$('.Truck').on('click', function () {
+			$(`.truckBrand_${i}`).html(`<div><h2>${truck[i].brand}</h2></div>`);
+		});
 	
+		$(`.truckBrand_${i}`).on('click', function () {
+			$(`.truckSpecs_${i}`).html(`${truck[i].printSpecs()}`);
+			$(`.truckType_${i}`).html(`${truck[i].printTruck()}`);
+			$(`.truckEngine_${i}`).html(`<div><h3>Engine:</h3></div>`);
+		});
 	
+		$(`.truckEngine_${i}`).on('click', function () {
+			$(`.truckEngineType_${i}`).html(`${truck[i].printEngine()}`);
+		});
+
+	};
 
 
-// --------------------------------
 
-	$('.Truck').on('click', function () {
-		$('.truckBrand').html(`<div><h2>${truck.brand}</h2></div>`);
-	});
-
-	$('.truckBrand').on('click', function () {
-		$('.truckSpecs').html(`${truck.printSpecs()}`);
-		$('.truckType').html(`${truck.printTruck()}`);
-		$('.truckEngine').html(`<div><h3>Engine:</h3></div>`);
-	});
-
-	$('.truckEngine').on('click', function () {
-		$('.truckEngineType').html(`${truck.printEngine()}`);
-	});
 
 
 	
